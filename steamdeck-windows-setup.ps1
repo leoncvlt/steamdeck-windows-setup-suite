@@ -62,6 +62,7 @@ if ($Choices -contains "Install Drivers") {
 
 if ($Choices -contains "Install Redistributables") {
     Write-Host "Installing Redistributables" -BackgroundColor Blue
+    Install-DownloadPackage -Path "https://api.github.com/repos/microsoft/winget-cli/releases/latest" -Match ".msixbundle"
     $Packages = Get-Content -Raw -Path "$PSScriptRoot/data/packages.json" | ConvertFrom-Json
     foreach ($PackageID in $Packages) {
         Install-WingetPackage $PackageID
