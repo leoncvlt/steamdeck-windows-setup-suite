@@ -25,6 +25,9 @@ If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR")) {
     New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" | Out-Null
 }
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\GameDVR" -Name "AllowGameDVR" -Type DWord -Value 0
+If (!(Test-Path "HKEY_CURRENT_USER\SOFTWARE\Microsoft\GameBar")) {
+    New-Item -Path "HKEY_CURRENT_USER\SOFTWARE\Microsoft\GameBar" | Out-Null
+}
 Set-ItemProperty -Path "HKEY_CURRENT_USER\SOFTWARE\Microsoft\GameBar" -Name "UseNexusForGameBarEnabled" -Type DWord -Value 0
 
 Write-Host "Disabling Microsoft Edge running in background"
