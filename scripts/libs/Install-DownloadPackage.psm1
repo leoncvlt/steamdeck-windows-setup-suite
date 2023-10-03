@@ -34,14 +34,14 @@ function Install-DownloadPackage {
             Start-Process -FilePath "expand.exe" -ArgumentList "-F:* $Path $TempPath" -Wait
         }
 
-        $Cleanup.Add($Path)
-        $Cleanup.Add($TempPath)
+        $Cleanup.Add($Path) | Out-Null
+        $Cleanup.Add($TempPath) | Out-Null
 
         $Path = $(Join-Path -Path $TempPath -ChildPath $Target)
         $Ext = [System.IO.Path]::GetExtension($Path)
     }
     else {
-        $Cleanup.Add($Path)
+        $Cleanup.Add($Path) | Out-Null
     }
 
     Write-Output "Executing $Path"
