@@ -1,0 +1,32 @@
+[
+  {
+    "Name": "APU Drivers (Do not reboot on install)",
+    "Url": "https://steamdeck-packages.steamos.cloud/misc/windows/drivers/Aerith%20Windows%20Driver_2209130944.zip",
+    "Target": "Aerith Windows Driver_2209130944/220913a-383120E-2209130944/Setup.exe"
+  },
+  {
+    "Name": "Audio Drivers (1/2)",
+    "Url": "https://steamdeck-packages.steamos.cloud/misc/windows/drivers/cs35l41-V1.2.1.0.zip",
+    "Target": "cs35l41-V1.2.1.0/cs35l41.inf"
+  },
+  {
+    "Name": "Audio Drivers (2/2)",
+    "Url": " https://steamdeck-packages.steamos.cloud/misc/windows/drivers/NAU88L21_x64_1.0.6.0_WHQL%20-%20DUA_BIQ_WHQL.zip",
+    "Target": "NAU88L21_x64_1.0.6.0_WHQL - DUA_BIQ_WHQL/NAU88L21.inf"
+  },
+  {
+    "Name": "Wireless Drivers",
+    "Url": "https://github.com/ryanrudolfoba/SteamDeck-Windows-WiFi-Fix/archive/refs/heads/main.zip",
+    "Target": "SteamDeck-Windows-WiFi-Fix-main/Setup.bat"
+  },
+  {
+    "Name": "Bluetooth Drivers",
+    "Url": "https://steamdeck-packages.steamos.cloud/misc/windows/drivers/RTBlueR_FilterDriver_1041.3005_1201.2021_new_L.zip",
+    "Target": "RTBlueR_FilterDriver_1041.3005_1201.2021_new_L/x64/Rtkfilter.inf"
+  },
+  {
+    "Name": "SD Card Reader Drivers",
+    "Url": "https://steamdeck-packages.steamos.cloud/misc/windows/drivers/BayHub_SD_STOR_installV3.4.01.89_W10W11_logoed_20220228.zip",
+    "Target": "BayHub_SD_STOR_ installV3.4.01.89_W10W11_logoed_20220228/x64/program files/BayHubTech/BH778/Win11x64/bhtsddr.inf"
+  }
+]
