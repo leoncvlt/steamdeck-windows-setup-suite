@@ -8,7 +8,7 @@ Import-Module -Name ("$PSScriptRoot\scripts\libs\Remove-UWPApp.psm1")
 # Import-Module -Name ("$PSScriptRoot\scripts\Remove-Shortcuts.psm1")
 
 function Invoke-Script {
-    Param { [String]$Name }
+    param ( [String]$Name )
     Invoke-Expression "& `"$PSScriptRoot\scripts\$name.ps1`""
 }
 
@@ -65,7 +65,6 @@ if ($Choices -contains "Install Redistributables") {
     Write-Host "Installing Redistributables" -BackgroundColor Blue
     $Packages = Get-Content -Raw -Path "$PSScriptRoot/data/packages.json" | ConvertFrom-Json
     foreach ($PackageID in $Packages) {
-        Write-Host "Installing $PackageID"
         Install-WingetPackage $PackageID
     }
 }

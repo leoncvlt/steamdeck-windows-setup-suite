@@ -1,7 +1,7 @@
 function Remove-Shortcuts {
-    Param {
+    Param (
         [String]$Name
-    }
+    )
 
     foreach ($shortcut in (Get-ChildItem -Path $env:USERPROFILE -Filter "*.lnk" -File -Recurse)) {
         if ($shortcut.Name -eq $Name) {
