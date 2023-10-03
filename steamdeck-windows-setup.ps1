@@ -5,7 +5,6 @@ Import-Module -Name ("$PSScriptRoot\scripts\libs\Show-SelectionMenu.psm1")
 Import-Module -Name ("$PSScriptRoot\scripts\libs\Install-DownloadPackage.psm1")
 Import-Module -Name ("$PSScriptRoot\scripts\libs\Install-WingetPackage.psm1")
 Import-Module -Name ("$PSScriptRoot\scripts\libs\Remove-UWPApp.psm1")
-# Import-Module -Name ("$PSScriptRoot\scripts\Remove-Shortcuts.psm1")
 
 function Invoke-Script {
     param ( [String]$Name )
@@ -84,22 +83,11 @@ if ($Choices -contains "Remove UWP Apps") {
 
 if ($Choices -contains "Remove OneDrive") {
     Write-Host "Removing OneDrive" -BackgroundColor Blue
-    Get-Process -Name "onedrive*" | Stop-Process -Force
-    Get-Service -Name "onedrive*" | Stop-Service -Force
-    Start-Sleep -s 2
-    $onedrive = "$env:SystemRoot\SysWOW64\OneDriveSetup.exe"
-    If (!(Test-Path $onedrive)) {
-        $onedrive = "$env:SystemRoot\System32\OneDriveSetup.exe"
-    }
-    Start-Process $onedrive "/uninstall" -NoNewWindow -Wait
-    Start-Sleep -s 2
-    Remove-Item -Path "$env:USERPROFILE\OneDrive" -Force -Recurse 
-    Remove-Item -Path "$env:LOCALAPPDATA\Microsoft\OneDrive" -Force -Recurse 
-    Remove-Item -Path "$env:PROGRAMDATA\Microsoft OneDrive" -Force -Recurse 
-    Remove-Item -Path "$env:SYSTEMDRIVE\OneDriveTemp" -Force -Recurse 
+    Invoke-Script "remove-onedrive";
 }
 
 if ($Choices -contains "Apply Tweaks") {
+    Write-Host "Applying Tweaks" -BackgroundColor Blue
     Invoke-Script "apply-tweaks";
 }
 

@@ -3,7 +3,7 @@
 A set of scripts to streamline and optimize a (mostly) automated setup of a Windows 11 installation on Steam Deck.
 
 ### Usage
-Download the source code and run the `steamdeck-windows-setup.bat` file - it will automatically start an elevated powershell window and run through the main script.
+Download the source code and run the `steamdeck-windows-setup.bat` file - it will automatically start an elevated powershell window and run through the main script. The file might trigger Defender SmartScreen - in that case, just click "More info" and then "Run anyway".
 
 ### What it does
 The script runs through the following operations:

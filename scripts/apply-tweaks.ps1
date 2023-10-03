@@ -2,7 +2,6 @@ Import-Module -Name ("$PSScriptRoot\libs\Install-DownloadPackage.psm1")
 Import-Module -Name ("$PSScriptRoot\libs\Install-WingetPackage.psm1")
 Import-Module -Name ("$PSScriptRoot\libs\Remove-UWPApp.psm1")
 
-Write-Host "Applying Tweaks" -BackgroundColor Blue
 Write-Host "Enabling Touch Keyboard and increasing size"
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\TabletTip\1.7" -Name "EnableDesktopModeAutoInvoke" -Value 1
 Set-ItemProperty -Path "HKCU:\Software\Microsoft\TabletTip\1.7" -Name "KeyboardLayoutPreference" -Value 2
