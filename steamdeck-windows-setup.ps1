@@ -53,7 +53,7 @@ if ($Choices -contains "Activate Windows") {
 
 if ($Choices -contains "Install Pending Updates") {
     Write-Host "Installing Pending Updates" -BackgroundColor Blue
-    Find-PackageProvider -Name 'Nuget' -ForceBootstrap -IncludeDependencies
+    Find-PackageProvider -Name 'Nuget' -ForceBootstrap -IncludeDependencies | Out-Null
     Install-Module PSWindowsUpdate -Force -AllowClobber
     Import-Module PSWindowsUpdate
     Get-WindowsUpdate -Install -AcceptAll -IgnoreReboot -Verbose
