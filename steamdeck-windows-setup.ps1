@@ -2,6 +2,7 @@ $global:ProgressPreference = "SilentlyContinue"
 $global:ErrorActionPreference = "SilentlyContinue"
 
 Import-Module -Name ("$PSScriptRoot\scripts\libs\Show-SelectionMenu.psm1")
+Import-Module -Name ("$PSScriptRoot\scripts\libs\Get-LatestGithubRelease.psm1")
 Import-Module -Name ("$PSScriptRoot\scripts\libs\Install-DownloadPackage.psm1")
 Import-Module -Name ("$PSScriptRoot\scripts\libs\Install-WingetPackage.psm1")
 Import-Module -Name ("$PSScriptRoot\scripts\libs\Remove-UWPApp.psm1")
@@ -39,6 +40,12 @@ if (-not $IsAdmin) {
 # Disable UAC
 Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Policies\System" -Name "EnableLUA" -Value 0
 
+if (($Choices -contains "Install Redistributables") -or ($Choices -contains "Install Steam Deck Tools")) {
+    # Update WinGet
+    $WingetRelease = Get-LatestGithubRelease -Repo "microsoft/winget-cli" -Match ".msixbundle"
+    Install-DownloadPackage -Path $WingetRelease
+}
+
 if ($Choices -contains "Activate Windows") {
     Write-Host "Activating Windows" -BackgroundColor Blue
     Invoke-Expression "& ([ScriptBlock]::Create((Invoke-RestMethod -Uri 'https://massgrave.dev/get'))) /KMS38"
@@ -63,7 +70,6 @@ if ($Choices -contains "Install Drivers") {
 
 if ($Choices -contains "Install Redistributables") {
     Write-Host "Installing Redistributables" -BackgroundColor Blue
-    Install-DownloadPackage -Path "https://api.github.com/repos/microsoft/winget-cli/releases/latest" -Match ".msixbundle"
     $Packages = Get-Content -Raw -Path "$PSScriptRoot/data/packages.json" | ConvertFrom-Json
     foreach ($PackageID in $Packages) {
         Install-WingetPackage $PackageID
@@ -72,7 +78,7 @@ if ($Choices -contains "Install Redistributables") {
 
 if ($Choices -contains "Install Steam Deck Tools") {
     Write-Host "Installing Steam Deck Tools" -BackgroundColor Blue
-    Install-DownloadPackage -Path "https://api.github.com/repos/ayufan/steam-deck-tools/releases/latest" -Match ".exe"
+    Invoke-Script "install-steamdeck-tools";
 }
 
 if ($Choices -contains "Remove UWP Apps") {

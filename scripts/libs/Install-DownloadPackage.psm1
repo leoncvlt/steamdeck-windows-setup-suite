@@ -1,8 +1,6 @@
-
 function Install-DownloadPackage {
     Param (
         [Parameter(Mandatory)][String]$Path, 
-        [String]$Match,
         [String]$Target,
         [String]$Arguments
     )
@@ -10,13 +8,6 @@ function Install-DownloadPackage {
     $Cleanup = New-Object System.Collections.ArrayList
 
     if (-Not (Test-Path -Path $Path -PathType Leaf)) {
-        if ($Path.Contains("api.github.com") -And $Path.Contains("releases")) { 
-            $Path = (Invoke-WebRequest -Uri $Path -UseBasicParsing).Content | ConvertFrom-Json |
-            Select-Object -ExpandProperty "assets" |
-            Where-Object "browser_download_url" -Match $Match |
-            Select-Object -ExpandProperty "browser_download_url"
-        }
-
         $TempFile = Join-Path -Path ([System.IO.Path]::GetTempPath()) -ChildPath ([System.IO.Path]::GetFileName($Path))
         Write-Host  "Downloading $Path"
         Invoke-WebRequest -URI $Path -OutFile $TempFile
@@ -24,6 +15,7 @@ function Install-DownloadPackage {
     }
 
     $Ext = [System.IO.Path]::GetExtension($Path)
+
     if ($Ext -eq ".zip" -Or $Ext -eq ".cab") {
         $TempPath = Join-Path -Path ([System.IO.Path]::GetTempPath()) -ChildPath ([guid]::NewGuid().ToString())
         Write-Output "Expanding archive to $TempPath"
