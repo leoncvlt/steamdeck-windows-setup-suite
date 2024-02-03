@@ -11,13 +11,14 @@ A set of scripts to streamline and optimize a (mostly) automated setup of a Wind
 
 The script will start by showing a selection menu that can be navigated with the Steam Deck controller, and where each of the following operations can be toggled and selectively performed:
 
-- Activates Windows, using the activation scripts at [https://massgrave.dev/](https://massgrave.dev/)
+- Activate Windows, using the activation scripts at [https://massgrave.dev/](https://massgrave.dev/)
 - Install any pending Windows updates
 - Install the official [Valve Drivers for the Steam Deck](https://help.steampowered.com/en/faqs/view/6121-ECCD-D643-BAA8)
-  - The APU driver being installed is the `2209130944` version, as the most recent one caused issues (error 1603) when installing on Windows 11 22H2. The installation is attended, so you'll have to click through the installer to continue. 
+  - The APU driver being installed is the `2209130944` version, as the most recent one caused issues (error 1603) when installing on Windows 11 22H2.
   - Rather than the official Wireless driver, the unlocked version from [https://github.com/ryanrudolfoba/SteamDeck-Windows-WiFi-Fix/](https://github.com/ryanrudolfoba/SteamDeck-Windows-WiFi-Fix/) is installed for better performance
 - Install all Visual C++ Redistributables Runtimes, DirectX & .NET runtimes
-- Install ayufan's [Steam Deck Tools](https://github.com/ayufan/steam-deck-tools) to enable performance overlays, TDP settings, fan control and more
+- Install ayufan's [Steam Deck Tools](https://github.com/ayufan/steam-deck-tools) or Valkirie's [Handheld Companion](https://github.com/Valkirie/HandheldCompanion/releases) to enable performance overlays, native controller input, TDP & fan settings, and more
+  - You should only install one of them, not both - the script will warn and stop you if you try to do so.
 - Remove bloatware UWP Apps, see the [source list](data/bloat.json) for details
 - Remove OneDrive
 - Applies various QoL tweaks, see the [source file](libs/apply-tweaks.ps1) for details. Feel free to uncomment as you see fit.
@@ -27,8 +28,9 @@ The script will start by showing a selection menu that can be navigated with the
 ### Disclaimer
 The script has been tested, but obviously I am not responsible if your Steam Deck explodes. As a general reccomendation, do not trust "Windows debloating" scripts from random internet people (like me!), but everything the script does should be pretty clear from reading the [source files](steamdeck-windows-setup.ps1).
 
-### Credits
+### Credits & Sources
 - https://github.com/CelesteHeartsong/SteamDeckAutomatedInstall
+- https://baldsealion.com/Steam-Deck-Ultimate-Windows-Guide
 - https://git.ameliorated.info/Styris/AME-11/
 - https://gist.github.com/DanielLarsenNZ/edc6dd611418581ef90b02ad8e23b363
 - https://github.com/LeDragoX/Win-Debloat-Tools

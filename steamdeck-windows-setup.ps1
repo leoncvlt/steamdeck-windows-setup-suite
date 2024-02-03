@@ -13,13 +13,15 @@ function Invoke-Script {
 }
 
 Write-Host "[ Steam Deck Windows Setup Suite ]" -BackgroundColor DarkBlue
-Write-Host "Press UP/DOWN to select, RIGHT to toggle, ENTER/A to confirm" -ForegroundColor DarkGray
+Write-Host "Press UP/DOWN to select, LEFT/RIGHT to toggle, ENTER/A to confirm" -ForegroundColor DarkGray
+Write-Host "Fields marked with * are attended and require user input to continue" -ForegroundColor DarkGray
 $Options = @(
     "Activate Windows",
     "Install Pending Updates", 
-    "Install Drivers", 
+    "Install Drivers *", 
     "Install Redistributables",
     "Install Steam Deck Tools",
+    "Install Handheld Companion *"
     "Remove UWP Apps",
     "Remove OneDrive",
     "Apply Tweaks",
@@ -28,6 +30,11 @@ $Options = @(
 $Choices = Show-SelectionMenu $Options -Multiselect
 
 if ($Choices.Count -eq 0) {
+    exit
+}
+
+if (($Choices -contains "Install Steam Deck Tools") -and ($Choices -contains "Install Handheld Companion *")) {
+    Write-Warning "You should only install Steam Deck Tools OR Handheld Companion, NOT both!"
     exit
 }
 
@@ -59,7 +66,7 @@ if ($Choices -contains "Install Pending Updates") {
     Get-WindowsUpdate -Install -AcceptAll -IgnoreReboot -Verbose
 }
 
-if ($Choices -contains "Install Drivers") {
+if ($Choices -contains "Install Drivers *") {
     Write-Host "Installing Drivers" -BackgroundColor Blue
     $Drivers = Get-Content -Raw -Path "$PSScriptRoot/data/drivers.json" | ConvertFrom-Json
     foreach ($Driver in $Drivers) {
@@ -79,6 +86,12 @@ if ($Choices -contains "Install Redistributables") {
 if ($Choices -contains "Install Steam Deck Tools") {
     Write-Host "Installing Steam Deck Tools" -BackgroundColor Blue
     Invoke-Script "install-steamdeck-tools";
+}
+
+if ($choices -contains "Install Handheld Companion *") {
+    Write-Host "Installing Handheld Companion" -BackgroundColor Blue
+    $URL = Get-LatestGithubRelease "Valkirie/HandheldCompanion" -Match ".exe"
+    Install-DownloadPackage -Path $URL
 }
 
 if ($Choices -contains "Remove UWP Apps") {
